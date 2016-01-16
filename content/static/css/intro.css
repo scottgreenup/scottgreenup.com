@@ -1,0 +1,142 @@
+
+.intro {
+  background: -webkit-linear-gradient(rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 60%), url("../img/content.jpg") no-repeat scroll center center / cover;
+  background:    -moz-linear-gradient(rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 60%), url("../img/content.jpg") no-repeat scroll center center / cover;
+  background:      -o-linear-gradient(rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 60%), url("../img/content.jpg") no-repeat scroll center center / cover;
+  background:         linear-gradient(rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 60%), url("../img/content.jpg") no-repeat scroll center center / cover;
+  float: left;
+  height: 480px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  width: 100%;
+}
+
+.intro h1 {
+  color: #FFF;
+  font-family: 'Raleway', sans-serif;
+  font-size: 18pt;
+  font-weight: 300;
+  letter-spacing: 0.6pt;
+  line-height: 30pt;
+  max-width: 600px;
+  margin: 0px auto;
+  text-align: center;
+}
+
+.intro h2 {
+  color: #FFF;
+  font-family: 'Raleway', sans-serif;
+  font-size: 12pt;
+  font-weight: 400;
+  max-width: 600px;
+  margin: 0px auto;
+  margin-top: 10px;
+  text-align: center;
+}
+
+aside#certs p {
+  font-weight: 200;
+  font-size: 12pt;
+  margin-top: 3px;
+}
+
+section#about p, li {
+  font-weight: 300;
+  font-size: 14pt;
+}
+
+aside#certs h1 {
+  text-align: left;
+}
+
+@media only screen {
+  aside#certs {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    display: block;
+    margin-top: 0px;
+    margin-bottom: 50px;
+    padding: 0px 50px;
+    float: left;
+    width: 100%;
+  }
+
+  section#about {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    display: block;
+    float: left;
+    margin: 50px 0px;
+    padding: 0px 50px;
+    width: 100%;
+  }
+
+  aside#certs h1 {
+    text-align: center;
+  }
+
+  aside#certs h4 {
+    text-align: center;
+  }
+
+  aside#certs p {
+    text-align: center;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+  }
+
+  p {
+    text-align: justify;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  aside#certs {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    margin-top: 50px;
+    margin-bottom: 0px;
+    border-left: 1px solid #999;
+    display: inline-block;
+    float: inherit;
+    padding: 0 50px;
+    width: 39%;
+  }
+
+  section#about {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    margin: 0px 0px;
+    padding: 50px 50px;
+    float: left;
+    display: inline-block;
+    width: 60%;
+  }
+
+  aside#certs h1 {
+    text-align: left;
+  }
+
+  aside#certs h4 {
+    text-align: left;
+  }
+
+  aside#certs p {
+    text-align: left;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    text-align: left;
+  }
+
+  p {
+    text-align: left;
+  }
+}
+
