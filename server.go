@@ -1,6 +1,9 @@
 package main
 
 import (
+    "github.com/scottgreenup/scottgreenup.com/blog"
+
+    "bytes"
     "html/template"
     "log"
     "net/http"
@@ -37,6 +40,20 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func blogHandler(w http.ResponseWriter, r *http.Request) {
+
+    markup, meta, _ := blog.ParseHTMLFromFile("content/posts/1452970313_Kill_All_Humans.md")
+    markup = append([]string{"{{define \"blog_content\"}}"}, markup...)
+    markup = append(markup, "{{end}}");
+
+    log.Printf("timestamp: %ud\n", meta.Timestamp);
+    log.Printf("title: %s\n", meta.Title);
+
+    var buf bytes.Buffer
+    for i := 0; i < len(markup); i++ {
+        buf.WriteString(markup[i])
+    }
+    templates.Parse(buf.String());
+
     if r.Method != "GET" {
         return
     }
@@ -46,6 +63,7 @@ func blogHandler(w http.ResponseWriter, r *http.Request) {
         if err != nil {
             log.Println(err.Error())
         }
+        return
     }
 
     err := renderTemplate(w, r, "blog")
@@ -67,5 +85,5 @@ func main() {
     http.HandleFunc("/", indexHandler)
 
     log.Println("Listening...")
-    http.ListenAndServe(":8080", nil)
+    http.ListenAndServe(":80", nil)
 }

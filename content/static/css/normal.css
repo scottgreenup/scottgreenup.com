@@ -20,11 +20,9 @@
     padding: 0px 50px;
     width: 100%;
   }
-
 }
 
 @media only screen and (min-width: 768px) {
-
   aside {
     -webkit-box-sizing: border-box;
        -moz-box-sizing: border-box;
@@ -40,11 +38,39 @@
     -webkit-box-sizing: border-box;
        -moz-box-sizing: border-box;
             box-sizing: border-box;
+    display: inline-block;
+    float: left;
     margin-top: 48px;
     padding: 12px 40px 0px 40px;
-    float: left;
-    display: inline-block;
     width: 70%;
   }
+
+  pre {
+    background: #FAF8F0;
+		font-family: "Courier 10 Pitch", Courier, monospace;
+		font-size: 95%;
+		line-height: 140%;
+		white-space: pre;
+		white-space: pre-wrap;
+		white-space: -moz-pre-wrap;
+		white-space: -o-pre-wrap;
+	}
+
+	code {
+		background: #faf8f0;
+		font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+		font-size: 95%;
+		line-height: 140%;
+		white-space: pre;
+		white-space: pre-wrap;
+		white-space: -moz-pre-wrap;
+		white-space: -o-pre-wrap;
+	}
+
+	#content code {
+		border: 1px solid #bebab0;
+		padding: 0.5em 1em;
+		display: block;
+	}
 
 }

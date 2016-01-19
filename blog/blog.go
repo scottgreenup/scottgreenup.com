@@ -2,8 +2,10 @@ package blog
 
 import (
     "bufio"
+    "log"
     "os"
     "regexp"
+    "strconv"
     "strings"
 )
 
@@ -21,18 +23,19 @@ const (
     TAG_CODE
     TAG_PARAGRAPH
     TAG_ANCHOR
+    TAG_META
 )
 
-type tagMetaData struct {
-    prefix string
-    suffix string
-    single_line bool
+type MetaData struct {
+    Timestamp uint64
+    Title string
 }
 
-func ParseHTML(lines []string) ([]string) {
+func ParseHTML(lines []string) ([]string, MetaData) {
     first := 0
     length := len(lines)
     var markup []string
+    var metadata MetaData
 
     for i := 0; i < length; i++ {
         curr := getBlockSemantic(lines[i])
@@ -61,6 +64,17 @@ func ParseHTML(lines []string) ([]string) {
             case TAG_HEADER1:
                 markup = append(markup, "<h1>" + lines[i][2:] + "</h1>")
 
+            case TAG_META:
+                if strings.HasPrefix(lines[i], "::title:") {
+                    log.Printf("title discovered: '%s'\n", lines[i])
+                    metadata.Title = lines[i][8:]
+                }
+                if strings.HasPrefix(lines[i], "::timestamp:") {
+                    log.Printf("timestamp discovered: '%s'\n", lines[i])
+                    timestamp, _ := strconv.Atoi(lines[i][12:])
+                    metadata.Timestamp = uint64(timestamp)
+                }
+
             case TAG_PARAGRAPH:
                 markup = append(markup, "<p>")
                 for j := first; j <= i; j++ {
@@ -84,21 +98,30 @@ func ParseHTML(lines []string) ([]string) {
                 markup = append(markup, "</ol>")
 
             case TAG_CODE:
-                markup = append(markup, "<pre>")
-                for j := first; j <= i; j++ {
-                    markup = append(markup, lines[j][8:])
+                markup = append(markup, "<pre><code>")
+                r := regexp.MustCompile(`\w`);
+                index := r.FindIndex([]byte(lines[first]));
+                if index == nil {
+                    continue
                 }
-                markup = append(markup, "</pre>")
+                for j := first; j <= i; j++ {
+                    markup = append(markup, lines[j][index[0]:] + "\n")
+                }
+                markup = append(markup, "</code></pre>")
             }
 
             first = i + 1
         }
     }
 
-    return markup
+    return markup, metadata
 }
 
 func getBlockSemantic(str string) int {
+    if strings.HasPrefix(str, "::") {
+        return TAG_META
+    }
+
     if strings.HasPrefix(str, "###### ") {
         return TAG_HEADER6
     }
@@ -123,7 +146,7 @@ func getBlockSemantic(str string) int {
     if r := regexp.MustCompile(`^ [\d]+. `); r.FindIndex([]byte(str)) != nil {
         return TAG_ORDERED_LIST
     }
-    if r := regexp.MustCompile(`\t\t`); r.FindIndex([]byte(str)) != nil {
+    if r := regexp.MustCompile(`^\t\t`); r.FindIndex([]byte(str)) != nil {
         return TAG_CODE
     }
 
@@ -144,10 +167,10 @@ func getSpanSemantic(str string) int {
     return NONE
 }
 
-func ParseHTMLFromFile(filename string) ([]string, error) {
+func ParseHTMLFromFile(filename string) ([]string, MetaData, error) {
     file, err := os.Open(filename)
     if err != nil {
-        return nil, err
+        return nil, MetaData{}, err
     }
     defer file.Close()
 
@@ -158,6 +181,8 @@ func ParseHTMLFromFile(filename string) ([]string, error) {
         lines = append(lines, scanner.Text())
     }
 
-    return ParseHTML(lines), nil;
+    html, meta := ParseHTML(lines)
+
+    return html, meta, nil
 }
 
