@@ -1,48 +1,31 @@
 
-@media only screen {
-  aside {
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
-    display: block;
-    margin-top: 48px;
-    padding: 0px 50px;
-    float: left;
-  }
+.content {
+  max-width: 1024px;
+  margin-top: 48px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
 
+@media only screen {
   section {
     -webkit-box-sizing: border-box;
        -moz-box-sizing: border-box;
             box-sizing: border-box;
     display: block;
-    float: left;
-    margin-top: 48px;
     padding: 0px 50px;
     width: 100%;
   }
 }
 
 @media only screen and (min-width: 768px) {
-  aside {
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
-    display: inline-block;
-    float: inherit;
-    margin-top: 48px;
-    padding: 12px 12px 0px 12px;
-    width: 29%;
-  }
-
   section {
     -webkit-box-sizing: border-box;
        -moz-box-sizing: border-box;
             box-sizing: border-box;
-    display: inline-block;
-    float: left;
-    margin-top: 48px;
+    display: block;
     padding: 12px 40px 0px 40px;
-    width: 70%;
+    width: 100%;
   }
 
   pre {
