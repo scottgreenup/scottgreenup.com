@@ -4,10 +4,14 @@ import (
     "github.com/scottgreenup/scottgreenup.com/blog"
 
     "bytes"
+    "flag"
     "html/template"
     "log"
     "net/http"
+    "strconv"
 )
+
+var port = flag.Int("port", 80, "The port for the webserver to run on.")
 
 var templates = template.Must(template.ParseGlob("content/template/*"))
 
@@ -72,6 +76,8 @@ func blogHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+    flag.Parse()
+
     // TODO - Remove the redudancy in serving static traffic
     fs := http.FileServer(http.Dir("content/static"))
     http.Handle("/static/", http.StripPrefix("/static/", fs))
@@ -82,5 +88,9 @@ func main() {
     http.HandleFunc("/", indexHandler)
 
     log.Println("Listening...")
-    http.ListenAndServe(":8080", nil)
+
+
+    port_string := strconv.Itoa(*port)
+
+    http.ListenAndServe(":" + port_string, nil)
 }
