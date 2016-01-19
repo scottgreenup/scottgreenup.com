@@ -41,12 +41,9 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 func blogHandler(w http.ResponseWriter, r *http.Request) {
 
-    markup, meta, _ := blog.ParseHTMLFromFile("content/posts/1452970313_Kill_All_Humans.md")
+    markup, _, _ := blog.ParseHTMLFromFile("content/posts/1452970313_Kill_All_Humans.md")
     markup = append([]string{"{{define \"blog_content\"}}"}, markup...)
     markup = append(markup, "{{end}}");
-
-    log.Printf("timestamp: %ud\n", meta.Timestamp);
-    log.Printf("title: %s\n", meta.Title);
 
     var buf bytes.Buffer
     for i := 0; i < len(markup); i++ {
@@ -85,5 +82,5 @@ func main() {
     http.HandleFunc("/", indexHandler)
 
     log.Println("Listening...")
-    http.ListenAndServe(":80", nil)
+    http.ListenAndServe(":8080", nil)
 }

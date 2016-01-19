@@ -2,10 +2,8 @@
   font-family: 'Raleway', sans-serif;
 }
 
-.container {
-  display: block;
-  float: left;
-  width: 100%;
+.content {
+  max-width: 1280px;
 }
 
 a {
@@ -61,7 +59,8 @@ footer {
 
 footer a {
   color: #888;
-  font-size: 2.2vw;
+  display: block;
+  font-size: 24px;
   font-weight: 300;
   text-decoration: none;
   padding: 20px;
@@ -69,10 +68,16 @@ footer a {
 }
 
 footer a:hover {
-  color: #555;
-  font-size: 2.2vw;
+  color: #333;
+  font-size: 24px;
   font-weight: 300;
   text-decoration: none;
   padding: 20px;
   border:none;
+}
+
+@media only screen and (min-width: 768px) {
+  footer a {
+    display: inline-block;
+  }
 }

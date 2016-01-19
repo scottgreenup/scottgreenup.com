@@ -2,7 +2,6 @@ package blog
 
 import (
     "bufio"
-    "log"
     "os"
     "regexp"
     "strconv"
@@ -66,11 +65,9 @@ func ParseHTML(lines []string) ([]string, MetaData) {
 
             case TAG_META:
                 if strings.HasPrefix(lines[i], "::title:") {
-                    log.Printf("title discovered: '%s'\n", lines[i])
                     metadata.Title = lines[i][8:]
                 }
                 if strings.HasPrefix(lines[i], "::timestamp:") {
-                    log.Printf("timestamp discovered: '%s'\n", lines[i])
                     timestamp, _ := strconv.Atoi(lines[i][12:])
                     metadata.Timestamp = uint64(timestamp)
                 }

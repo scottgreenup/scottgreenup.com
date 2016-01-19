@@ -45,6 +45,11 @@ section#about p, li {
   font-size: 14pt;
 }
 
+div#aboutme {
+  margin: auto;
+  max-width: 1280px;
+}
+
 aside#certs h1 {
   text-align: left;
 }
