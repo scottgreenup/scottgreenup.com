@@ -4,34 +4,33 @@
   background:    -moz-linear-gradient(rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 60%), url("../img/content.jpg") no-repeat scroll center center / cover;
   background:      -o-linear-gradient(rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 60%), url("../img/content.jpg") no-repeat scroll center center / cover;
   background:         linear-gradient(rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 60%), url("../img/content.jpg") no-repeat scroll center center / cover;
+  color: #FFF;
   float: left;
+  font-family: 'Raleway', sans-serif;
   height: 480px;
   padding-top: 50px;
   padding-bottom: 50px;
   width: 100%;
 }
 
-.intro h1 {
-  color: #FFF;
-  font-family: 'Raleway', sans-serif;
-  font-size: 18pt;
-  font-weight: 300;
-  letter-spacing: 0.6pt;
-  line-height: 30pt;
+.intro h1,
+.intro h2 {
   max-width: 600px;
   margin: 0px auto;
   text-align: center;
 }
 
-.intro h2 {
-  color: #FFF;
-  font-family: 'Raleway', sans-serif;
-  font-size: 12pt;
+.intro h1 {
+  font-size: 2.25em;
   font-weight: 400;
-  max-width: 600px;
-  margin: 0px auto;
-  margin-top: 10px;
-  text-align: center;
+  line-height: 1.05em;
+}
+
+.intro h2 {
+  font-size: 1.75em;
+  font-weight: 300;
+  line-height:1.25em;
+  margin-top: 225px;
 }
 
 aside#certs {
@@ -49,6 +48,12 @@ aside#certs p {
   margin-top: 3px;
 }
 
+aside#certs h4 {
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+}
+
 section#about {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
@@ -57,7 +62,7 @@ section#about {
 
 section#about p, li {
   font-weight: 300;
-  font-size: 14pt;
+  font-size: 1em;
 }
 
 div#aboutme {
@@ -91,14 +96,23 @@ aside#certs h1 {
   }
 
   aside#certs h4 {
+    font-family: 'Quattrocento';
+    font-weight: 800;
+    font-size: 1em;
     text-align: left;
   }
 
   aside#certs p {
+    font-family: 'Quattrocento';
     text-align: left;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  section h1,
+  section h2,
+  section h3,
+  section h4,
+  section h5,
+  section h6 {
     text-align: left;
   }
 
@@ -140,7 +154,7 @@ aside#certs h1 {
   }
 
   p {
-    text-align: justify;
+    text-align: left;
   }
 }
 
@@ -165,10 +179,12 @@ aside#certs h1 {
   }
 
   aside#certs h4 {
+    font-family: 'Raleway', sans-serif;
     text-align: center;
   }
 
   aside#certs p {
+    font-family: 'Raleway', sans-serif;
     text-align: center;
   }
 
@@ -177,6 +193,6 @@ aside#certs h1 {
   }
 
   p {
-    text-align: justify;
+    text-align: left;
   }
 }

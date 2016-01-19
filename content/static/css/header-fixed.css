@@ -14,10 +14,9 @@ header {
 
 /* Portrait View */
 @media only screen {
-  header > span {
+  header > h1 {
     display: none;
     font-family: 'Montserrat', sans-serif;
-    font-size: 16pt;
     margin: 0;
     padding: 0;
   }
@@ -33,7 +32,6 @@ header {
 
   nav > a {
     color: #444;
-    font-size: 12pt;
     margin: 0px 5px;
   }
 }
