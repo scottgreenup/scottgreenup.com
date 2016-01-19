@@ -1,39 +1,4 @@
 
-.content {
-  max-width: 1024px;
-  margin-top: 48px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-}
-
-pre {
-  background: #FAF8F0;
-  font-family: "Courier 10 Pitch", Courier, monospace;
-  font-size: 95%;
-  line-height: 140%;
-  white-space: pre;
-  white-space: pre-wrap;
-  white-space: -moz-pre-wrap;
-  white-space: -o-pre-wrap;
-}
-
-code {
-  background: #faf8f0;
-  font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
-  font-size: 95%;
-  line-height: 140%;
-  white-space: pre;
-  white-space: pre-wrap;
-  white-space: -moz-pre-wrap;
-  white-space: -o-pre-wrap;
-}
-
-#content code {
-  border: 1px solid #bebab0;
-  padding: 0.5em 1em;
-  display: block;
-}
 
 @media only screen {
   section {

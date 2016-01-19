@@ -61,7 +61,7 @@ func ParseHTML(lines []string) ([]string, MetaData) {
                 markup = append(markup, "<h2>" + lines[i][3:] + "</h2>")
 
             case TAG_HEADER1:
-                markup = append(markup, "<h1>" + lines[i][2:] + "</h1>")
+                markup = append(markup, "<h1 id=\"blogtitle\">" + lines[i][2:] + "</h1>")
 
             case TAG_META:
                 if strings.HasPrefix(lines[i], "::title:") {

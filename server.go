@@ -6,9 +6,12 @@ import (
     "bytes"
     "flag"
     "html/template"
+    "io/ioutil"
     "log"
     "net/http"
+    "sort"
     "strconv"
+    "time"
 )
 
 var port = flag.Int("port", 80, "The port for the webserver to run on.")
@@ -43,16 +46,53 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
     }
 }
 
+type ByTimestamp []blog.MetaData
+func (b ByTimestamp) Len() int { return len(b) }
+func (b ByTimestamp) Swap(i, j int) { b[i], b[j] = b[j], b[i] }
+func (b ByTimestamp) Less(i, j int) bool { return b[i].Timestamp > b[j].Timestamp }
+
 func blogHandler(w http.ResponseWriter, r *http.Request) {
-
-    markup, _, _ := blog.ParseHTMLFromFile("content/posts/1452970313_Kill_All_Humans.md")
-    markup = append([]string{"{{define \"blog_content\"}}"}, markup...)
-    markup = append(markup, "{{end}}");
-
-    var buf bytes.Buffer
-    for i := 0; i < len(markup); i++ {
-        buf.WriteString(markup[i])
+    // Get all the posts out of the directory
+    files, _ := ioutil.ReadDir("./content/posts");
+    posts := make(map[blog.MetaData][]string)
+    var meta_data []blog.MetaData
+    for _, f := range files {
+        markup, meta, err := blog.ParseHTMLFromFile("./content/posts/" + f.Name())
+        if err != nil {
+            log.Printf("Error from ParseHTMLFromFile(): %+v", err);
+        }
+        posts[meta] = markup;
+        meta_data = append(meta_data, meta)
     }
+
+    // Print them to a buffer, inserting HTML appropriately
+    sort.Sort(ByTimestamp(meta_data))
+    var buf bytes.Buffer
+    buf.WriteString("{{define \"blog_content\"}}")
+    for k, v := range meta_data {
+
+        // Write the post to the buffer, insert the timestamp after header
+        buf.WriteString("<article>")
+        markup := posts[v];
+        for i := 0; i < len(markup); i++ {
+            buf.WriteString(markup[i])
+
+            // TODO move this logic to blog package
+            if i == 0 {
+                tm := time.Unix(int64(v.Timestamp), 0)
+                buf.WriteString(
+                    "<h5 id=\"timestamp\">" + tm.Format(time.RFC1123) + "</h5>",
+                )
+            }
+        }
+        buf.WriteString("</article>")
+
+        // Insert a divider between posts
+        if k != len(meta_data)-1 {
+            buf.WriteString("<hr />");
+        }
+    }
+    buf.WriteString("{{end}}")
     templates.Parse(buf.String());
 
     if r.Method != "GET" {

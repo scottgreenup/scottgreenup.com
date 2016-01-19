@@ -21,6 +21,14 @@ a:hover {
   border-bottom: 1px solid #000;
 }
 
+article {
+  border: 1px solid #DDD;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
 /* Body ***********************************************************************/
 body {
   background-color: #FFF;
@@ -49,6 +57,11 @@ h1 {
   line-height: 1.05em;
 }
 
+h1#blogtitle {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 h2 {
   font-size: 2.25em;
   line-height: 1.25em;
@@ -62,6 +75,14 @@ h3 {
 h4 {
   font-size: 1.125em;
   line-height: 1.222em;
+}
+
+h5#timestamp {
+  font-family: 'Quattrocento';
+  font-size: 1.125em;
+  line-height: 1.222em;
+  margin: 0;
+  padding: 0;
 }
 
 @media only screen and (max-device-width: 768px) {
@@ -156,4 +177,16 @@ code {
   border: 1px solid #bebab0;
   padding: 0.5em 1em;
   display: block;
+}
+
+hr {
+  border: 0;
+  border-bottom: 1px solid #909090;
+  clear: both;
+  display: block;
+  height: 0;
+  margin: 0 auto 50px auto;
+  padding-top: 50px;
+  max-width: 320px;
+  width: 100%;
 }
