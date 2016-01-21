@@ -20,6 +20,7 @@ const (
     TAG_UNORDERED_LIST
     TAG_ORDERED_LIST
     TAG_CODE
+    TAG_CODE_BLOCK
     TAG_PARAGRAPH
     TAG_ANCHOR
     TAG_META
@@ -59,8 +60,8 @@ func getBlockSemantic(str string) int {
     if r := regexp.MustCompile(`^ [\d]+. `); r.FindIndex([]byte(str)) != nil {
         return TAG_ORDERED_LIST
     }
-    if r := regexp.MustCompile(`^\t\t`); r.FindIndex([]byte(str)) != nil {
-        return TAG_CODE
+    if strings.HasPrefix(str, "```") {
+        return TAG_CODE_BLOCK
     }
 
     r := regexp.MustCompile(`^[\s]*$`)
@@ -220,6 +221,16 @@ func ParseHTML(lines []string) ([]string, MetaData) {
             for j := first; j <= i; j++ {
                 markup = append(markup, lines[j][index[0]:] + "\n")
             }
+            markup = append(markup, "</code></pre>")
+
+        case TAG_CODE_BLOCK:
+            markup = append(markup, "<pre><code>")
+            j := i+1;
+            for j < len(lines) && getBlockSemantic(lines[j]) != TAG_CODE_BLOCK {
+                markup = append(markup, lines[j] + "\n")
+                j++
+            }
+            i = j;
             markup = append(markup, "</code></pre>")
         }
         first = i + 1
