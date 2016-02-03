@@ -1,9 +1,9 @@
 
 .intro {
-  background: -webkit-linear-gradient(rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 60%), url("../img/content.jpg") no-repeat scroll center center / cover;
-  background:    -moz-linear-gradient(rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 60%), url("../img/content.jpg") no-repeat scroll center center / cover;
-  background:      -o-linear-gradient(rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 60%), url("../img/content.jpg") no-repeat scroll center center / cover;
-  background:         linear-gradient(rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 60%), url("../img/content.jpg") no-repeat scroll center center / cover;
+  background: -webkit-linear-gradient(rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 60%), url("../img/river.jpg") no-repeat scroll center center / cover;
+  background:    -moz-linear-gradient(rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 60%), url("../img/river.jpg") no-repeat scroll center center / cover;
+  background:      -o-linear-gradient(rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 60%), url("../img/river.jpg") no-repeat scroll center center / cover;
+  background:         linear-gradient(rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 60%), url("../img/river.jpg") no-repeat scroll center center / cover;
   color: #FFF;
   float: left;
   font-family: 'Raleway', sans-serif;
