@@ -15,7 +15,9 @@ var code_elements = document.getElementsByTagName("code");
 console.log("code elements:")
 console.log(code_elements)
 
-var keywords = ["import", "from", "if", "continue", "for", "not", "in"];
+var keywords = ["import", "from", "if", "for", "not", "in", "len",
+"print", "True", "False"];
+var keywords_alt = ["continue", "break"]
 
 for (n = 0; n < code_elements.length; n++) {
     var inner_html = code_elements[n].innerHTML;
@@ -34,6 +36,12 @@ for (n = 0; n < code_elements.length; n++) {
             for (k = 0; k < keywords.length; k++) {
                 if (w == keywords[k]) {
                     words[j] = wrap(words[j], "blue");
+                    break;
+                }
+            }
+            for (k = 0; k < keywords_alt.length; k++) {
+                if (w == keywords_alt[k]) {
+                    words[j] = wrap(words[j], "red");
                     break;
                 }
             }
