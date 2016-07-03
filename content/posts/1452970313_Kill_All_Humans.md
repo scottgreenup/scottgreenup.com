@@ -27,9 +27,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 The following section is code.
 
-				int main() {
-					return 0;
-				}
+    int main() {
+      return 0;
+    }
 
 Signed, Scott
 

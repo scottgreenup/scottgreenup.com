@@ -2,6 +2,7 @@ package blog
 
 import (
     "bufio"
+    "fmt"
     "os"
     "regexp"
     "strconv"
@@ -21,6 +22,7 @@ const (
     TAG_ORDERED_LIST
     TAG_CODE
     TAG_CODE_BLOCK
+    TAG_CODE_INDENT
     TAG_PARAGRAPH
     TAG_ANCHOR
     TAG_META
@@ -62,6 +64,9 @@ func getBlockSemantic(str string) int {
     }
     if strings.HasPrefix(str, "```") {
         return TAG_CODE_BLOCK
+    }
+    if strings.HasPrefix(str, "    ") || strings.HasPrefix(str, "\t") {
+        return TAG_CODE_INDENT
     }
 
     r := regexp.MustCompile(`^[\s]*$`)
@@ -225,12 +230,27 @@ func ParseHTML(lines []string) ([]string, MetaData) {
 
         case TAG_CODE_BLOCK:
             markup = append(markup, "<pre><code>")
+
+            lang := lines[i][3:]
+            fmt.Println(lang)
+
             j := i+1;
             for j < len(lines) && getBlockSemantic(lines[j]) != TAG_CODE_BLOCK {
-                markup = append(markup, lines[j] + "\n")
+                line := lines[j]
+                if strings.Compare(lang, "python") == 0 {
+                    line = PythonHighlight(line)
+                }
+                markup = append(markup, line + "\n")
                 j++
             }
             i = j;
+            markup = append(markup, "</code></pre>")
+
+        case TAG_CODE_INDENT:
+            markup = append(markup, "<pre><code>")
+            for j := first; j <= i; j++ {
+                markup = append(markup, lines[j][4:] + "\n")
+            }
             markup = append(markup, "</code></pre>")
         }
         first = i + 1

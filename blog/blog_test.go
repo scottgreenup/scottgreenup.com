@@ -138,7 +138,7 @@ func TestParse(t *testing.T) {
         "Whatever is going on shall be hunted.",
         "If nothing is going on, then nothing shall be hunted.",
         "</p>",
-        "<h1>Features of Travelling</h1>",
+        "<h1 id=\"blogtitle\">Features of Travelling</h1>",
         "<p>",
         "There are many features of travelling, here are some listed:",
         "</p>",
@@ -155,7 +155,7 @@ func TestParse(t *testing.T) {
         "</ol>",
     }
 
-    result := ParseHTML(input)
+    result, _ := ParseHTML(input)
     smaller := len(result)
     if smaller > len(expected) {
         smaller = len(expected)
