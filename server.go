@@ -5,6 +5,7 @@ import (
 
     "bytes"
     "flag"
+    "fmt"
     "html/template"
     "io/ioutil"
     "log"
@@ -33,6 +34,8 @@ func renderTemplate(w http.ResponseWriter, r *http.Request, name string) error {
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
+    fmt.Printf("%s - index\n", r.RemoteAddr)
+
     if r.URL.Path != "/" {
         http.NotFound(w, r)
         return
@@ -52,6 +55,8 @@ func (b ByTimestamp) Swap(i, j int) { b[i], b[j] = b[j], b[i] }
 func (b ByTimestamp) Less(i, j int) bool { return b[i].Timestamp > b[j].Timestamp }
 
 func blogHandler(w http.ResponseWriter, r *http.Request) {
+    fmt.Printf("%s - blog\n", r.RemoteAddr)
+
     // Get all the posts out of the directory
     files, _ := ioutil.ReadDir("./content/posts");
     posts := make(map[blog.MetaData][]string)
@@ -128,7 +133,6 @@ func main() {
     http.HandleFunc("/", indexHandler)
 
     log.Println("Listening...")
-
 
     port_string := strconv.Itoa(*port)
 

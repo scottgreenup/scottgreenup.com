@@ -2,7 +2,6 @@ package blog
 
 import (
     "bufio"
-    "fmt"
     "os"
     "regexp"
     "strconv"
@@ -232,7 +231,6 @@ func ParseHTML(lines []string) ([]string, MetaData) {
             markup = append(markup, "<pre><code>")
 
             lang := lines[i][3:]
-            fmt.Println(lang)
 
             j := i+1;
             for j < len(lines) && getBlockSemantic(lines[j]) != TAG_CODE_BLOCK {
