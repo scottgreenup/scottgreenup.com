@@ -13,7 +13,6 @@ import (
     "net/http"
     "sort"
     "strconv"
-    "time"
 )
 
 var port = flag.Int("port", 80, "The port for the webserver to run on.")
@@ -35,7 +34,7 @@ func renderTemplate(w http.ResponseWriter, r *http.Request, name string) error {
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-    fmt.Printf("%s - index\n", r.RemoteAddr)
+    fmt.Printf("%s - %s\n", r.RemoteAddr, r.URL.Path)
 
     if r.URL.Path != "/" {
         http.NotFound(w, r)
@@ -56,7 +55,7 @@ func (b ByTimestamp) Swap(i, j int) { b[i], b[j] = b[j], b[i] }
 func (b ByTimestamp) Less(i, j int) bool { return b[i].Timestamp > b[j].Timestamp }
 
 func blogHandler(w http.ResponseWriter, r *http.Request) {
-    fmt.Printf("%s - blog\n", r.RemoteAddr)
+    fmt.Printf("%s - %s\n", r.RemoteAddr, r.URL.Path)
 
     // Get all the posts out of the directory
     files, _ := ioutil.ReadDir("./content/posts");
@@ -82,14 +81,6 @@ func blogHandler(w http.ResponseWriter, r *http.Request) {
         markup := posts[v];
         for i := 0; i < len(markup); i++ {
             buf.WriteString(markup[i])
-
-            // TODO move this logic to blog package
-            if i == 2 {
-                tm := time.Unix(int64(v.Timestamp), 0)
-                buf.WriteString(
-                    "<h5 id=\"timestamp\">" + tm.Format(time.RFC1123) + "</h5>",
-                )
-            }
         }
         buf.WriteString("</article>")
 
@@ -125,11 +116,10 @@ func singleBlogHandler(w http.ResponseWriter, r *http.Request) {
     vars := mux.Vars(r)
     name := vars["name"]
 
-    // TODO change to URL instead of manually creating URL
-    fmt.Printf("%s - blog/%s\n", r.RemoteAddr, name)
+    fmt.Printf("%s - %s\n", r.RemoteAddr, r.URL.Path)
 
     // Get the file with md at the end
-    markup, meta, err := blog.ParseHTMLFromFile("./content/posts/" + name + ".md")
+    markup, _, err := blog.ParseHTMLFromFile("./content/posts/" + name + ".md")
 
     var buf bytes.Buffer
     buf.WriteString("{{define \"blog_content\"}}")
@@ -137,14 +127,6 @@ func singleBlogHandler(w http.ResponseWriter, r *http.Request) {
     buf.WriteString("<article>")
     for i := 0; i < len(markup); i++ {
         buf.WriteString(markup[i])
-
-        // TODO move this logic to blog package
-        if i == 2 {
-            tm := time.Unix(int64(meta.Timestamp), 0)
-            buf.WriteString(
-                "<h5 id=\"timestamp\">" + tm.Format(time.RFC1123) + "</h5>",
-            )
-        }
     }
     buf.WriteString("</article>")
     buf.WriteString("{{end}}")

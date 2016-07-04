@@ -6,6 +6,7 @@ import (
     "regexp"
     "strconv"
     "strings"
+    "time"
 )
 
 const (
@@ -173,6 +174,11 @@ func ParseHTML(lines []string, url string) ([]string, MetaData) {
             if strings.HasPrefix(lines[i], "::timestamp:") {
                 timestamp, _ := strconv.Atoi(lines[i][12:])
                 metadata.Timestamp = uint64(timestamp)
+
+                // Add the timestamp to our markup
+                tm := time.Unix(int64(metadata.Timestamp), 0)
+                buf := "<h5 id=\"timestamp\">" + tm.Format(time.RFC1123) + "</h5>"
+                markup = append([]string{buf}, markup...)
             }
             first = i + 1;
             continue
