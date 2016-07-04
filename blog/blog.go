@@ -85,7 +85,7 @@ func getSpanSemantic(str string) int {
     return NONE
 }
 
-func ParseHTML(lines []string) ([]string, MetaData) {
+func ParseHTML(lines []string, url string) ([]string, MetaData) {
     first := 0
     length := len(lines)
     var markup []string
@@ -160,7 +160,9 @@ func ParseHTML(lines []string) ([]string, MetaData) {
             continue;
 
         case TAG_HEADER1:
+            markup = append(markup, "<a href=\"" + url + "\">")
             markup = append(markup, "<h1 id=\"blogtitle\">" + lines[i][2:] + "</h1>")
+            markup = append(markup, "</a>")
             first = i + 1;
             continue;
 
@@ -258,6 +260,11 @@ func ParseHTML(lines []string) ([]string, MetaData) {
 }
 
 func ParseHTMLFromFile(filename string) ([]string, MetaData, error) {
+
+    splat := strings.Split(filename, "/")
+    tail := splat[len(splat) - 1]
+    url := "/blog/" + tail[0:len(tail) - 3]
+
     file, err := os.Open(filename)
     if err != nil {
         return nil, MetaData{}, err
@@ -271,7 +278,7 @@ func ParseHTMLFromFile(filename string) ([]string, MetaData, error) {
         lines = append(lines, scanner.Text())
     }
 
-    html, meta := ParseHTML(lines)
+    html, meta := ParseHTML(lines, url)
 
     return html, meta, nil
 }

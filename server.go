@@ -84,7 +84,7 @@ func blogHandler(w http.ResponseWriter, r *http.Request) {
             buf.WriteString(markup[i])
 
             // TODO move this logic to blog package
-            if i == 0 {
+            if i == 2 {
                 tm := time.Unix(int64(v.Timestamp), 0)
                 buf.WriteString(
                     "<h5 id=\"timestamp\">" + tm.Format(time.RFC1123) + "</h5>",
@@ -121,12 +121,61 @@ func blogHandler(w http.ResponseWriter, r *http.Request) {
     }
 }
 
+func singleBlogHandler(w http.ResponseWriter, r *http.Request) {
+    vars := mux.Vars(r)
+    name := vars["name"]
+
+    // TODO change to URL instead of manually creating URL
+    fmt.Printf("%s - blog/%s\n", r.RemoteAddr, name)
+
+    // Get the file with md at the end
+    markup, meta, err := blog.ParseHTMLFromFile("./content/posts/" + name + ".md")
+
+    var buf bytes.Buffer
+    buf.WriteString("{{define \"blog_content\"}}")
+    // Write the post to the buffer, insert the timestamp after header
+    buf.WriteString("<article>")
+    for i := 0; i < len(markup); i++ {
+        buf.WriteString(markup[i])
+
+        // TODO move this logic to blog package
+        if i == 2 {
+            tm := time.Unix(int64(meta.Timestamp), 0)
+            buf.WriteString(
+                "<h5 id=\"timestamp\">" + tm.Format(time.RFC1123) + "</h5>",
+            )
+        }
+    }
+    buf.WriteString("</article>")
+    buf.WriteString("{{end}}")
+    templates.Parse(buf.String());
+
+    if r.Method != "GET" {
+        return
+    }
+
+    if len(r.URL.RawQuery) == 0 {
+        err := renderTemplate(w, r, "blog")
+        if err != nil {
+            log.Println(err.Error())
+        }
+        return
+    }
+
+    err = renderTemplate(w, r, "blog")
+    if err != nil {
+        log.Println(err.Error())
+        http.Error(w, http.StatusText(500), 500)
+        return
+    }
+}
+
 func main() {
     flag.Parse()
-
     r := mux.NewRouter()
     r.HandleFunc("/blog", blogHandler)
     r.HandleFunc("/blog/", blogHandler)
+    r.HandleFunc("/blog/{name}", singleBlogHandler)
     r.HandleFunc("/", indexHandler)
     r.PathPrefix("/static/").Handler(
         http.StripPrefix(
@@ -135,7 +184,4 @@ func main() {
 
     port_string := strconv.Itoa(*port)
     http.ListenAndServe(":" + port_string, r)
-
 }
-
-
