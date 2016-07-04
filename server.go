@@ -2,6 +2,7 @@ package main
 
 import (
     "github.com/scottgreenup/scottgreenup.com/blog"
+    "github.com/gorilla/mux"
 
     "bytes"
     "flag"
@@ -123,18 +124,17 @@ func blogHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
     flag.Parse()
 
-    // TODO - Remove the redudancy in serving static traffic
-    fs := http.FileServer(http.Dir("content/static"))
-    http.Handle("/static/", http.StripPrefix("/static/", fs))
-    http.Handle("/blog/static/", http.StripPrefix("/blog/static/", fs))
-
-    // Must be ordered in least specific to most specific.
-    http.HandleFunc("/blog/", blogHandler)
-    http.HandleFunc("/", indexHandler)
-
-    log.Println("Listening...")
+    r := mux.NewRouter()
+    r.HandleFunc("/blog", blogHandler)
+    r.HandleFunc("/", indexHandler)
+    r.PathPrefix("/static/").Handler(
+        http.StripPrefix(
+            "/static",
+            http.FileServer(http.Dir("content/static"))))
 
     port_string := strconv.Itoa(*port)
+    http.ListenAndServe(":" + port_string, r)
 
-    http.ListenAndServe(":" + port_string, nil)
 }
+
+
