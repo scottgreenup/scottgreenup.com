@@ -2,7 +2,6 @@ header {
   background-color: #FFF;
   color: #000;
   display: block;
-  font-family: 'Montserrat', sans-serif;
   text-align: center;
   width: 100%;
 }
@@ -16,7 +15,6 @@ nav {
 
 nav > a {
   color: #404040;
-  font-family: 'Raleway', sans-serif;
   margin: 0px 10px;
 }
 

@@ -8,17 +8,20 @@
   margin: 0 auto;
 }
 
+p {
+  font-size: 1em;
+}
+
 a {
   color: #808080;
-  font-family: 'Quattrocento';
   transition: color 0.3s ease 0s;
   text-decoration: none;
-  border-bottom: 1px dotted #999;
+  border-bottom: 1px dotted #CCC;
 }
 
 a:hover {
-  color: #000;
-  border-bottom: 1px solid #000;
+  color: #00F;
+  border-bottom: 1px solid #00F;
 }
 
 article {
@@ -32,7 +35,7 @@ article {
 /* Body ***********************************************************************/
 body {
   background-color: #FFF;
-  font-family: 'Quattrocento';
+  font-family: 'Open Sans', sans-serif;
   margin: 0;
   padding: 0;
   font-size: 1em;
@@ -48,8 +51,9 @@ body {
 
 /* Headings *******************************************************************/
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Chunkfiveroman', sans-serif;
-  font-weight: normal;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.05em;
 }
 
 h1 {
@@ -58,8 +62,14 @@ h1 {
 }
 
 h1#blogtitle {
+  color: black;
   margin-top: 0;
   margin-bottom: 0;
+}
+
+h1#blogtitle:hover {
+  color: #555555;
+  text-decoration: underline;
 }
 
 h2 {
@@ -78,8 +88,10 @@ h4 {
 }
 
 h5#timestamp {
-  font-family: 'Quattrocento';
-  font-size: 1.125em;
+  color: #777;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.8em;
+  font-weight: 300;
   line-height: 1.222em;
   margin: 0;
   padding: 0;
@@ -120,7 +132,7 @@ footer {
 footer a {
   color: #888;
   display: block;
-  font-family: 'Raleway';
+  font-family: 'Open Sans', sans-serif;
   font-size: 24px;
   font-weight: 300;
   text-decoration: none;
@@ -130,7 +142,7 @@ footer a {
 
 footer a:hover {
   color: #333;
-  font-family: 'Raleway';
+  font-family: 'Open Sans', sans-serif;
   font-size: 24px;
   font-weight: 300;
   text-decoration: none;
