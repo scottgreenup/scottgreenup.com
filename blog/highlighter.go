@@ -1,5 +1,8 @@
 package blog
 
+// background = #FDF6E3
+// 
+
 import (
     "fmt"
     "regexp"
@@ -12,11 +15,13 @@ const (
 )
 
 func highlight(line string, words map[string]int) string {
+
+
     // TODO move colors into CSS, use IDs instead
     colors := make(map[int]string)
-    colors[SEM_PRIM]    = "#81A2BE"
-    colors[SEM_CONTROL] = "#B294BB"
-    colors[SEM_KEYWORD] = "#CC6666"
+    colors[SEM_PRIM]    = "#268BD2"
+    colors[SEM_CONTROL] = "#859900"
+    colors[SEM_KEYWORD] = "#DC322f"
     return highlightCustom(line, words, colors)
 }
 
@@ -28,7 +33,7 @@ func highlightCustom(line string, words map[string]int, colors map[int]string) s
     for i := 0; i < len(line); i++ {
         if line[i] == '"' {
             if flipbit {
-                tmp += "<span style=\"color: #B5BD68;\">"
+                tmp += "<span style=\"color: #CB4B16;\">"
                 tmp += string(line[i])
             } else {
                 tmp += string(line[i])

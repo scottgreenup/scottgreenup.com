@@ -151,11 +151,13 @@ footer a:hover {
 }
 
 pre {
-  background: #282A2E;
-  color: #FFFFFF;
+  background: #FDF6E3;
+  border: 1px dashed black;
+  color: #002B36;
   font-family: "Courier 10 Pitch", Courier, monospace;
   font-size: 95%;
   line-height: 140%;
+  padding: 5px;
   tab-size: 4;
   white-space: pre;
   white-space: pre-wrap;
@@ -164,8 +166,8 @@ pre {
 }
 
 code {
-  background: #282A2E;
-  color: #FFFFFF;
+  background: #FDF6E3;
+  color: #002B36;
   font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
   font-size: 95%;
   line-height: 140%;
