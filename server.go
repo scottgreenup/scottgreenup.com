@@ -126,6 +126,7 @@ func main() {
 
     r := mux.NewRouter()
     r.HandleFunc("/blog", blogHandler)
+    r.HandleFunc("/blog/", blogHandler)
     r.HandleFunc("/", indexHandler)
     r.PathPrefix("/static/").Handler(
         http.StripPrefix(
