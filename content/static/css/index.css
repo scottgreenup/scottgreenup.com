@@ -1,11 +1,7 @@
-/* http://typecast.com/blog/a-more-modern-scale-for-web-typography
- *
- */
-
 .content {
-  max-width: 1024px;
-  padding: 0 30px;
+  display: block;
   margin: 0 auto;
+  max-width: 1024px;
 }
 
 p {
@@ -20,7 +16,7 @@ a {
 }
 
 a:hover {
-  color: #00F;
+  color: #38F;
   border-bottom: 1px solid #00F;
 }
 
@@ -124,7 +120,7 @@ footer {
   background-color: #FFF;
   display: block;
   float: left;
-  padding: 50px 0 50px 0;
+  margin: 100px 0 20px 0;
   text-align: center;
   width: 100%;
 }
@@ -144,10 +140,13 @@ div#copyright p {
   text-align: center;
 }
 
+div#copyright p a {
+  border: none;
+}
+
 footer a {
   color: #888;
   display: block;
-  font-family: 'Open Sans', sans-serif;
   font-size: 24px;
   font-weight: 300;
   text-decoration: none;
@@ -156,8 +155,6 @@ footer a {
 }
 
 footer a:hover {
-  color: #333;
-  font-family: 'Open Sans', sans-serif;
   font-size: 24px;
   font-weight: 300;
   text-decoration: none;

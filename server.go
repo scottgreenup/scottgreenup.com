@@ -6,7 +6,6 @@ import (
 
     "bytes"
     "flag"
-    "fmt"
     "html/template"
     "io/ioutil"
     "log"
@@ -33,13 +32,19 @@ func renderTemplate(w http.ResponseWriter, r *http.Request, name string) error {
     return nil
 }
 
-func indexHandler(w http.ResponseWriter, r *http.Request) {
-    fmt.Printf("%s - %s\n", r.RemoteAddr, r.URL.Path)
+func aboutHandler(w http.ResponseWriter, r *http.Request) {
+    log.Printf("%s - %s\n", r.RemoteAddr, r.URL.Path)
 
-    if r.URL.Path != "/" {
-        http.NotFound(w, r)
+    err := renderTemplate(w, r, "about")
+    if err != nil {
+        log.Println(err.Error())
+        http.Error(w, http.StatusText(500), 500)
         return
     }
+}
+
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+    log.Printf("%s - %s\n", r.RemoteAddr, r.URL.Path)
 
     err := renderTemplate(w, r, "index")
     if err != nil {
@@ -55,7 +60,7 @@ func (b ByTimestamp) Swap(i, j int) { b[i], b[j] = b[j], b[i] }
 func (b ByTimestamp) Less(i, j int) bool { return b[i].Timestamp > b[j].Timestamp }
 
 func blogHandler(w http.ResponseWriter, r *http.Request) {
-    fmt.Printf("%s - %s\n", r.RemoteAddr, r.URL.Path)
+    log.Printf("%s - %s\n", r.RemoteAddr, r.URL.Path)
 
     // Get all the posts out of the directory
     files, _ := ioutil.ReadDir("./content/posts");
@@ -116,7 +121,7 @@ func singleBlogHandler(w http.ResponseWriter, r *http.Request) {
     vars := mux.Vars(r)
     name := vars["name"]
 
-    fmt.Printf("%s - %s\n", r.RemoteAddr, r.URL.Path)
+    log.Printf("%s - %s\n", r.RemoteAddr, r.URL.Path)
 
     // Get the file with md at the end
     markup, _, err := blog.ParseHTMLFromFile("./content/posts/" + name + ".md")
@@ -155,15 +160,23 @@ func singleBlogHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
     flag.Parse()
     r := mux.NewRouter()
-    r.HandleFunc("/blog", blogHandler)
-    r.HandleFunc("/blog/", blogHandler)
-    r.HandleFunc("/blog/{name}", singleBlogHandler)
-    r.HandleFunc("/", indexHandler)
+
+    // Handler for page URLs
+    r.HandleFunc("/about",          aboutHandler)
+    r.HandleFunc("/about/",         aboutHandler)
+    r.HandleFunc("/blog",           blogHandler)
+    r.HandleFunc("/blog/",          blogHandler)
+    r.HandleFunc("/blog/{name}",    singleBlogHandler)
+    r.HandleFunc("/",               indexHandler)
+
+    // Handler for static content (i.e. css, img, js)
     r.PathPrefix("/static/").Handler(
         http.StripPrefix(
             "/static",
             http.FileServer(http.Dir("content/static"))))
 
+    // Listen and serve on `port`
     port_string := strconv.Itoa(*port)
+    log.Printf("Listening on port %s\n", port_string)
     http.ListenAndServe(":" + port_string, r)
 }

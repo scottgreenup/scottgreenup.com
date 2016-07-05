@@ -1,0 +1,162 @@
+
+aside#certs {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+    margin-top: 50px;
+    margin-bottom: 0px;
+    padding: 0 50px;
+}
+
+aside#certs p {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 200;
+  font-size: 0.9em;
+  line-height: 1.2em;
+  margin-top: 3px;
+}
+
+aside#certs h4 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 500;
+  font-size: 1em;
+  line-height: 1em;
+  margin: 0;
+  padding: 0;
+}
+
+section#about {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+section#about p, li {
+  font-weight: 300;
+  font-size: 1em;
+}
+
+aside#certs h1 {
+  text-align: left;
+}
+
+
+@media only screen {
+  aside#certs {
+    border-left: 1px solid #999;
+    display: inline-block;
+    float: inherit;
+    width: 39%;
+  }
+
+  section#about {
+    display: inline-block;
+    float: left;
+    margin: 0px 0px;
+    padding: 50px 50px;
+    width: 60%;
+  }
+
+  aside#certs h1 {
+    text-align: left;
+  }
+
+  aside#certs h4 {
+    text-align: left;
+  }
+
+  aside#certs p {
+    text-align: left;
+  }
+
+  section h1,
+  section h2,
+  section h3,
+  section h4,
+  section h5,
+  section h6 {
+    text-align: left;
+  }
+
+  p {
+    text-align: left;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  aside#certs {
+    border-left: none;
+    display: block;
+    float: left;
+    width: 100%;
+    margin-top: 0;
+  }
+
+  section#about {
+    display: block;
+    float: left;
+    margin-top: 50px;
+    margin-bottom: 0;
+    padding: 0px 50px;
+    width: 100%;
+  }
+
+  aside#certs h1 {
+    text-align: center;
+  }
+
+  aside#certs h4 {
+    text-align: center;
+  }
+
+  aside#certs p {
+    text-align: center;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+  }
+
+  p {
+    text-align: left;
+  }
+}
+
+@media only screen and (max-device-width: 768px) {
+  aside#certs {
+    border-left: none;
+    display: block;
+    float: left;
+    width: 100%;
+    margin-top: 0;
+  }
+
+  section#about {
+    display: block;
+    float: left;
+    margin-top: 50px;
+    margin-bottom: 0;
+    padding: 0px 15px;
+    width: 100%;
+  }
+
+  aside#certs h1 {
+    text-align: center;
+  }
+
+  aside#certs h4 {
+    text-align: center;
+  }
+
+  aside#certs p {
+    text-align: center;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+  }
+
+  p {
+    text-align: left;
+  }
+}

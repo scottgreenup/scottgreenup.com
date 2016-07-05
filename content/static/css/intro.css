@@ -1,4 +1,12 @@
 
+body {
+  background-color: #000;
+}
+
+footer {
+  background-color: #000;
+}
+
 .intro {
   background: -webkit-linear-gradient(rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,1.0) 90%), url("../img/earth.jpg") no-repeat scroll center top / cover;
   background:    -moz-linear-gradient(rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,1.0) 90%), url("../img/earth.jpg") no-repeat scroll center top / cover;
@@ -8,7 +16,7 @@
   float: left;
   font-family: 'Open Sans', sans-serif;
   height: 480px;
-  padding-top: 50px;
+  padding-top: 70px;
   padding-bottom: 50px;
   position: relative;
   width: 100%;
@@ -16,19 +24,24 @@
 
 .intro nav {
   background: transparent;
-  padding-top: 1em;
+  margin: 0 auto;
+  padding: 16px 0 16px 0;
   position: absolute;
-  right: 1em;
-  text-align: right;
+  text-align: center;
   top: 0;
+  width: 100%;
 }
 
 .intro nav a {
   color: #FFF;
-  font-size: 1em;
+  font-size: 1.2em;
   font-weight: 300;
   line-height: 2em;
   border-bottom: none;
+}
+
+.intro nav a:hover {
+  color: #38F;
 }
 
 .intro h1,
@@ -61,7 +74,7 @@
 }
 
 .intro table {
-  bottom: 40px;
+  bottom: 0px;
   left: 0;
   position: absolute;
   vertical-align: bottom;
@@ -80,169 +93,3 @@
 }
 
 
-aside#certs {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-    margin-top: 50px;
-    margin-bottom: 0px;
-    padding: 0 50px;
-}
-
-aside#certs p {
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 200;
-  font-size: 0.9em;
-  line-height: 1.2em;
-  margin-top: 3px;
-}
-
-aside#certs h4 {
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 500;
-  font-size: 1em;
-  line-height: 1em;
-  margin: 0;
-  padding: 0;
-}
-
-section#about {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-}
-
-section#about p, li {
-  font-weight: 300;
-  font-size: 1em;
-}
-
-div#aboutme {
-  margin: auto;
-  max-width: 1280px;
-}
-
-aside#certs h1 {
-  text-align: left;
-}
-
-
-@media only screen {
-  aside#certs {
-    border-left: 1px solid #999;
-    display: inline-block;
-    float: inherit;
-    width: 39%;
-  }
-
-  section#about {
-    display: inline-block;
-    float: left;
-    margin: 0px 0px;
-    padding: 50px 50px;
-    width: 60%;
-  }
-
-  aside#certs h1 {
-    text-align: left;
-  }
-
-  aside#certs h4 {
-    text-align: left;
-  }
-
-  aside#certs p {
-    text-align: left;
-  }
-
-  section h1,
-  section h2,
-  section h3,
-  section h4,
-  section h5,
-  section h6 {
-    text-align: left;
-  }
-
-  p {
-    text-align: left;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  aside#certs {
-    border-left: none;
-    display: block;
-    float: left;
-    width: 100%;
-    margin-top: 0;
-  }
-
-  section#about {
-    display: block;
-    float: left;
-    margin-top: 50px;
-    margin-bottom: 0;
-    padding: 0px 50px;
-    width: 100%;
-  }
-
-  aside#certs h1 {
-    text-align: center;
-  }
-
-  aside#certs h4 {
-    text-align: center;
-  }
-
-  aside#certs p {
-    text-align: center;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    text-align: center;
-  }
-
-  p {
-    text-align: left;
-  }
-}
-
-@media only screen and (max-device-width: 768px) {
-  aside#certs {
-    border-left: none;
-    display: block;
-    float: left;
-    width: 100%;
-    margin-top: 0;
-  }
-
-  section#about {
-    display: block;
-    float: left;
-    margin-top: 50px;
-    margin-bottom: 0;
-    padding: 0px 15px;
-    width: 100%;
-  }
-
-  aside#certs h1 {
-    text-align: center;
-  }
-
-  aside#certs h4 {
-    text-align: center;
-  }
-
-  aside#certs p {
-    text-align: center;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    text-align: center;
-  }
-
-  p {
-    text-align: left;
-  }
-}
