@@ -129,6 +129,21 @@ footer {
   width: 100%;
 }
 
+div#copyright {
+  display: block;
+  float: left;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+div#copyright p {
+  color: #555;
+  font-size: 0.8em;
+  margin: 0;
+  text-align: center;
+}
+
 footer a {
   color: #888;
   display: block;

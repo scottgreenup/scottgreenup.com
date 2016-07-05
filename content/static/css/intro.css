@@ -1,31 +1,29 @@
 
 .intro {
-  background: -webkit-linear-gradient(rgba(0,0,0,0) 60%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,1.0) 90%), url("../img/earth.jpg") no-repeat scroll center top / cover;
-  background:    -moz-linear-gradient(rgba(0,0,0,0) 60%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,1.0) 90%), url("../img/earth.jpg") no-repeat scroll center top / cover;
-  background:      -o-linear-gradient(rgba(0,0,0,0) 60%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,1.0) 90%), url("../img/earth.jpg") no-repeat scroll center top / cover;
-  background:         linear-gradient(rgba(0,0,0,0) 60%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,1.0) 90%), url("../img/earth.jpg") no-repeat scroll center top / cover;
+  background: -webkit-linear-gradient(rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,1.0) 90%), url("../img/earth.jpg") no-repeat scroll center top / cover;
+  background:    -moz-linear-gradient(rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,1.0) 90%), url("../img/earth.jpg") no-repeat scroll center top / cover;
+  background:      -o-linear-gradient(rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,1.0) 90%), url("../img/earth.jpg") no-repeat scroll center top / cover;
+  background:         linear-gradient(rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,1.0) 90%), url("../img/earth.jpg") no-repeat scroll center top / cover;
   color: #FFF;
   float: left;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   height: 480px;
   padding-top: 50px;
   padding-bottom: 50px;
-  width: 100%;
   position: relative;
+  width: 100%;
 }
 
 .intro nav {
   background: transparent;
-  text-align: right;
-
   padding-top: 1em;
   position: absolute;
-  top: 0;
   right: 1em;
+  text-align: right;
+  top: 0;
 }
 
 .intro nav a {
-  font-family: 'Open Sans', sans-serif;
   color: #FFF;
   font-size: 1em;
   font-weight: 300;
@@ -42,14 +40,12 @@
 }
 
 .intro h1 {
-  font-family: 'Helvetica', 'Open Sans', sans-serif;
   font-weight: 300;
   font-size: 2.75em;
   line-height: 1.0em;
 }
 
 .intro h2 {
-  font-family: 'Helvetica', 'Open Sans', sans-serif;
   font-size: 1.50em;
   font-weight: 300;
 }
@@ -59,16 +55,15 @@
 }
 
 .intro h3 {
-  font-family: 'Helvetica', 'Open Sans', sans-serif;
   font-size: 1.25em;
   font-weight: 300;
   line-height: 1.25em;
 }
 
 .intro table {
-  position: absolute;
-  left: 0;
   bottom: 40px;
+  left: 0;
+  position: absolute;
   vertical-align: bottom;
   width: 100%;
 }
@@ -180,12 +175,14 @@ aside#certs h1 {
     display: block;
     float: left;
     width: 100%;
+    margin-top: 0;
   }
 
   section#about {
     display: block;
     float: left;
-    margin: 50px 0px;
+    margin-top: 50px;
+    margin-bottom: 0;
     padding: 0px 50px;
     width: 100%;
   }
@@ -217,12 +214,14 @@ aside#certs h1 {
     display: block;
     float: left;
     width: 100%;
+    margin-top: 0;
   }
 
   section#about {
     display: block;
     float: left;
-    margin: 50px 0px;
+    margin-top: 50px;
+    margin-bottom: 0;
     padding: 0px 15px;
     width: 100%;
   }
