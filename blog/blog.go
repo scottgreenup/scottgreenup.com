@@ -79,7 +79,7 @@ func getBlockSemantic(str string) int {
 }
 
 func getSpanSemantic(str string) int {
-    if r := regexp.MustCompile(`\[[\w\s']+\]\([\w:/.?=]+\)`); r.FindIndex([]byte(str)) != nil {
+    if r := regexp.MustCompile(`\[[\w\s']+\]\([\w:/.?=-]+\)`); r.FindIndex([]byte(str)) != nil {
         return TAG_ANCHOR
     }
 
@@ -101,7 +101,7 @@ func ParseHTML(lines []string, url string) ([]string, MetaData) {
 
         switch curr {
         case TAG_ANCHOR:
-            r := regexp.MustCompile(`\[[\w\s']+\]\([\w:/.?=]+\)`);
+            r := regexp.MustCompile(`\[[\w\s']+\]\([\w:/.?=-]+\)`);
             m := r.FindAllIndex([]byte(lines[i]), -1);
 
             line_md := lines[i];
@@ -110,7 +110,7 @@ func ParseHTML(lines []string, url string) ([]string, MetaData) {
                 part := line_md[v[0]:v[1]]
                 re_link := regexp.MustCompile(`\[[\w\s']+\]`);
                 in_link := re_link.FindIndex([]byte(part))
-                re_text := regexp.MustCompile(`\([\w:/.?=]+\)`);
+                re_text := regexp.MustCompile(`\([\w:/.?=-]+\)`);
                 in_text := re_text.FindIndex([]byte(part))
 
                 link := part[in_link[0]+1:in_link[1]-1]
