@@ -6,6 +6,7 @@ import (
 
     "bytes"
     "flag"
+    "fmt"
     "html/template"
     "io/ioutil"
     "log"
@@ -157,6 +158,11 @@ func singleBlogHandler(w http.ResponseWriter, r *http.Request) {
     }
 }
 
+func notFound(w http.ResponseWriter, r *http.Request) {
+    log.Printf("%s - %s\n", r.RemoteAddr, r.URL.Path)
+    fmt.Fprintf(w, "404 Not Found");
+}
+
 func main() {
     flag.Parse()
     r := mux.NewRouter()
@@ -168,6 +174,8 @@ func main() {
     r.HandleFunc("/blog/",          blogHandler)
     r.HandleFunc("/blog/{name}",    singleBlogHandler)
     r.HandleFunc("/",               indexHandler)
+
+    r.NotFoundHandler = http.HandlerFunc(notFound);
 
     // Handler for static content (i.e. css, img, js)
     r.PathPrefix("/static/").Handler(
