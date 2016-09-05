@@ -3,8 +3,10 @@ package main
 import (
     "github.com/scottgreenup/scottgreenup.com/blog"
     "github.com/gorilla/mux"
+    "rsc.io/letsencrypt"
 
     "bytes"
+    "crypto/tls"
     "flag"
     "fmt"
     "html/template"
@@ -168,13 +170,12 @@ func main() {
     r := mux.NewRouter()
 
     // Handler for page URLs
-    r.HandleFunc("/about",          aboutHandler)
-    r.HandleFunc("/about/",         aboutHandler)
-    r.HandleFunc("/blog",           blogHandler)
-    r.HandleFunc("/blog/",          blogHandler)
-    r.HandleFunc("/blog/{name}",    singleBlogHandler)
-    r.HandleFunc("/",               indexHandler)
-
+    r.HandleFunc("/about",          aboutHandler).Methods("GET")
+    r.HandleFunc("/about/",         aboutHandler).Methods("GET")
+    r.HandleFunc("/blog",           blogHandler).Methods("GET")
+    r.HandleFunc("/blog/",          blogHandler).Methods("GET")
+    r.HandleFunc("/blog/{name}",    singleBlogHandler).Methods("GET")
+    r.HandleFunc("/",               indexHandler).Methods("GET")
     r.NotFoundHandler = http.HandlerFunc(notFound);
 
     // Handler for static content (i.e. css, img, js)
@@ -186,5 +187,32 @@ func main() {
     // Listen and serve on `port`
     port_string := strconv.Itoa(*port)
     log.Printf("Listening on port %s\n", port_string)
-    http.ListenAndServe(":" + port_string, r)
+
+    var m letsencrypt.Manager
+    m.Register("scott.j.greenup+letsencrypt@gmail.com", func(terms string) bool {
+        log.Printf("Agreeing to %s ...", terms)
+        return true
+    })
+
+
+    if err := m.CacheFile("letsencrypt.cache"); err != nil {
+        log.Fatal(err)
+    }
+    //http.ListenAndServe(":" + port_string, r)
+    //log.Fatal(m.Serve())
+
+    srv := &http.Server {
+        Addr:       ":https",
+        TLSConfig:  &tls.Config {
+            GetCertificate: m.GetCertificate,
+        },
+        // TODO work out this:
+        Handler:    r,
+    }
+
+    go func() {
+        http.ListenAndServe(":http", http.HandlerFunc(letsencrypt.RedirectHTTP))
+    }()
+
+    srv.ListenAndServeTLS("", "")
 }
