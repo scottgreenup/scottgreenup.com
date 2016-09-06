@@ -18,6 +18,7 @@ import (
 )
 
 var port = flag.Int("port", 80, "The port for the webserver to run on.")
+var prod = flag.Bool("prod", false, "Whether or not we are running in prod.")
 
 var templates = template.Must(template.ParseGlob("content/template/*"))
 
@@ -188,31 +189,32 @@ func main() {
     port_string := strconv.Itoa(*port)
     log.Printf("Listening on port %s\n", port_string)
 
-    var m letsencrypt.Manager
-    m.Register("scott.j.greenup+letsencrypt@gmail.com", func(terms string) bool {
-        log.Printf("Agreeing to %s ...", terms)
-        return true
-    })
+    if *prod {
+        log.Printf("Running TLS")
+        var m letsencrypt.Manager
+        m.Register("scott.j.greenup+letsencrypt@gmail.com", func(terms string) bool {
+            log.Printf("Agreeing to %s ...", terms)
+            return true
+        })
+        if err := m.CacheFile("letsencrypt.cache"); err != nil {
+            log.Fatal(err)
+        }
 
+        srv := &http.Server {
+            Addr:       ":https",
+            TLSConfig:  &tls.Config {
+                GetCertificate: m.GetCertificate,
+            },
+            // TODO work out this:
+            Handler:    r,
+        }
+        go func() {
+            http.ListenAndServe(":http", http.HandlerFunc(letsencrypt.RedirectHTTP))
+        }()
 
-    if err := m.CacheFile("letsencrypt.cache"); err != nil {
-        log.Fatal(err)
+        srv.ListenAndServeTLS("", "")
+    } else {
+        log.Printf("Running HTTP")
+        http.ListenAndServe(":" + port_string, r)
     }
-    //http.ListenAndServe(":" + port_string, r)
-    //log.Fatal(m.Serve())
-
-    srv := &http.Server {
-        Addr:       ":https",
-        TLSConfig:  &tls.Config {
-            GetCertificate: m.GetCertificate,
-        },
-        // TODO work out this:
-        Handler:    r,
-    }
-
-    go func() {
-        http.ListenAndServe(":http", http.HandlerFunc(letsencrypt.RedirectHTTP))
-    }()
-
-    srv.ListenAndServeTLS("", "")
 }
